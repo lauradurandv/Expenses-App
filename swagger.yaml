@@ -1,0 +1,261 @@
+openapi: 3.0.0
+info:
+  title: expenses api
+  description: ""
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://expense-api-laura.onrender.com/api/v1
+    variables: {}
+paths:
+  /expenses:
+    get:
+      tags:
+        - Expenses
+      summary: allExpenses
+      description: >-
+        This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+
+        A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+      operationId: allExpenses
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Expenses
+      summary: createExpense
+      description: >-
+        This is a GET request and it is used to "get" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).
+
+
+        A successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data.
+      operationId: createExpense
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createExpenseRequest"
+                - example:
+                    category: Needs
+                    amount: 28
+                    description: gas
+            example:
+              category: Needs
+              amount: 28
+              description: gas
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /expenses/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The expense ID
+    patch:
+      tags:
+        - Expenses
+      summary: updateExpense
+      description: >-
+        This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+
+
+        A successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code.
+      operationId: updateExpense
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updateExpenseRequest"
+                - example:
+                    description: gas for car
+            example:
+              description: gas for car
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - Expenses
+      summary: getExpense
+      operationId: getExpense
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Expenses
+      summary: deleteExpense
+      description: >-
+        This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).
+
+
+        A successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code.
+      operationId: deleteExpense
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      description: >-
+        This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+
+        A successful POST request typically returns a `200 OK` or `201 Created` response code.
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/loginrequest"
+                - example:
+                    email: blanca@example.com
+                    password: blanca123
+            example:
+              email: blanca@example.com
+              password: blanca123
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: register
+      description: >-
+        This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+
+        A successful POST request typically returns a `200 OK` or `201 Created` response code.
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/registerrequest"
+                - example:
+                    name: jesus
+                    email: jesus@example.com
+                    password: jesus123
+            example:
+              name: jesus
+              email: jesus@example.com
+              password: jesus123
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    createExpenseRequest:
+      title: createExpenseRequest
+      required:
+        - category
+        - amount
+        - description
+      type: object
+      properties:
+        category:
+          type: string
+        amount:
+          type: number
+        description:
+          type: string
+      example:
+        category: Needs
+        amount: 28
+        description: gas
+    loginrequest:
+      title: loginrequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: blanca@example.com
+        password: blanca123
+    registerrequest:
+      title: registerrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: jesus
+        email: jesus@example.com
+        password: jesus123
+    updateExpenseRequest:
+      title: updateExpenseRequest
+      required:
+        - description
+      type: object
+      properties:
+        description:
+          type: string
+      example:
+        description: gas for car
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Expenses
+    description: ""
+  - name: Auth
+    description: ""
