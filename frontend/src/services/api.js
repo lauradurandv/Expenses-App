@@ -94,7 +94,7 @@ export const deleteExpense = async (rowId) => {
 
 export const addExpense = async (bodyData) => {
   try {
-    const response = await axios.post(`${base_url}/expenses/`, bodyData,{
+    const response = await axios.post(`${base_url}/expenses/`, bodyData, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },

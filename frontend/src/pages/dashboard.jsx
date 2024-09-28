@@ -80,8 +80,11 @@ const Dashboard = () => {
     setDescription(event.target.value);
   };
 
-  const handleEdit = (rowId) => {
-    setEditRowId(rowId);
+  const handleEdit = (row) => {
+    setEditRowId(row._id);
+    setCategory(row.category);
+    setDescription(row.description);
+    setAmount(row.amount);
   };
 
   const handleSave = async (rowId) => {
@@ -96,6 +99,14 @@ const Dashboard = () => {
     } catch (error) {
       console.error(error);
     }
+
+    try {
+      const response = await fetchExpenses();
+      setExpenses(response);
+    } catch (error) {
+      console.error(error);
+    }
+    setEditRowId(null);
   };
 
   const handleDeleteOpenDialogue = (rowId) => {
@@ -152,10 +163,11 @@ const Dashboard = () => {
         setDisplayMessage("Expenses Added.");
         const response = await fetchExpenses();
         setOpenAddDialogue(false);
-        setCategory("");
-        setAmount(0);
-        setDescription("");
+        setNewCategory("");
+        setNewAmount(0);
+        setNewDescription("");
         setExpenses(response);
+        setDisplayMessage("");
       } catch (error) {
         console.error(error);
       }
@@ -163,6 +175,7 @@ const Dashboard = () => {
 
     createExpense();
   };
+
   return (
     <ThemeProvider theme={theme}>
       <TableContainer component={Paper}>
@@ -241,10 +254,7 @@ const Dashboard = () => {
                       Save
                     </Button>
                   ) : (
-                    <Button
-                      variant="outlined"
-                      onClick={() => handleEdit(row._id)}
-                    >
+                    <Button variant="outlined" onClick={() => handleEdit(row)}>
                       Edit
                     </Button>
                   )}

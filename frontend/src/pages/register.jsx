@@ -117,6 +117,7 @@ const Register = () => {
           defaultValue={user.password}
           label="Password"
           variant="outlined"
+          type="password"
           onChange={handlePassword}
         />
         <Button onClick={handleRegister} variant="outlined">

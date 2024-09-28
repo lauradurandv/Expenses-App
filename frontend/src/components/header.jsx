@@ -51,9 +51,7 @@ const Header = ({ isLoggedIn, handleLogout }) => {
                 </NavLink>
               </Typography>
               <Button onClick={handleLogout} variant="outlined">
-                <NavLink to="/" className={styling.link}>
-                  Logout
-                </NavLink>
+                Logout
               </Button>
             </Toolbar>
           </AppBar>

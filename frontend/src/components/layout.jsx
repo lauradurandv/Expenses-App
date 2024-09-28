@@ -1,9 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./header";
-const Layout = ({ isLoggedIn, handlelogout }) => {
+const Layout = ({ isLoggedIn, handleLogout }) => {
+   const navigate = useNavigate();
+
+   const handleLogoutWithNavigate = () => {
+     handleLogout();
+     navigate("/"); // Now you can use navigate here
+   };
+
   return (
     <>
-      <Header handlelogout={handlelogout} isLoggedIn={isLoggedIn} />
+      <Header handleLogout={handleLogoutWithNavigate} isLoggedIn={isLoggedIn} />
       <Outlet />
     </>
   );
