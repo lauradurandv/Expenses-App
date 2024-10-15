@@ -1,20 +1,12 @@
-import {
-  Box,
-  createTheme,
-  ThemeProvider,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-} from "@mui/material";
-import Logo from "../assets/logo.png";
+import { Box, createTheme, ThemeProvider} from "@mui/material";
+import trackImg from "../assets/Track.png";
+import planImg from "../assets/Plan.png";
+import goalsImg from "../assets/Goals.png";
+import FeatureBox from "../components/featureBox";
 const theme = createTheme({
-  typography: {
-    fontFamily: "Segoe UI",
-  },
   palette: {
     primary: {
-      main: "#ffbd59", // orange
+      main: "#4bb966", // orange
       contrastText: "#080357", // dark blue
     },
   },
@@ -30,26 +22,12 @@ const FrontPage = () => {
             borderRadius: 1,
             display: "flex",
             alignItems: "center",
+            flexDirection: "column",
           }}
         >
-          <img src={Logo} />
-          <List>
-            <ListItem>
-              <ListItemText primary="View Expenses" />
-            </ListItem>
-            <Divider variant="middle" component="li" />
-            <ListItem>
-              <ListItemText primary="Edit Expenses" />
-            </ListItem>
-            <Divider variant="middle" component="li" />
-            <ListItem>
-              <ListItemText primary="Delete Expenses" />
-            </ListItem>
-            <Divider variant="middle" component="li" />
-            <ListItem>
-              <ListItemText primary="Add Expenses" />
-            </ListItem>
-          </List>
+          <FeatureBox imgSrc={trackImg} text="Track your expenses"/>
+          <FeatureBox imgSrc={planImg} text="Make a budget" imagePosition="right"/>
+          <FeatureBox imgSrc={goalsImg} text="Meet your financial goals" />
         </Box>
       </Box>
     </ThemeProvider>

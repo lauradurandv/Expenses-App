@@ -5,6 +5,7 @@ import {
   ThemeProvider,
   createTheme,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import { useState } from "react";
 import { loginUser } from "../services/api";
@@ -57,6 +58,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
   });
   const [error, setError] = useState(false);
   const [displayMessage, setDisplayMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleEmail = (e) => {
     const input = e.target.value;
     setUser((user) => ({
@@ -74,19 +76,23 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
   };
 
   const handleLogin = async () => {
+     setLoading(true);
     try {
       const response = await loginUser(user);
       if (response.success === false) {
         setError(!error);
         setDisplayMessage(response.message);
+        setLoading(false);
       }
       localStorage.setItem("token", JSON.stringify(response.token));
       localStorage.setItem("user", JSON.stringify(response.user.name));
+      setLoading(false);
       setIsLoggedIn(!isLoggedIn);
       setDisplayMessage("Login succesful");
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
   return (
@@ -108,6 +114,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
           type="password"
           onChange={handlePassword}
         />
+        {loading && <CircularProgress />}
         <Button onClick={handleLogin} variant="outlined">
           Login
         </Button>

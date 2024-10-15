@@ -6,3 +6,8 @@
 .link:hover {
   color: white;
 }
+
+.logo {
+  width: 8em;
+  height: auto;
+}

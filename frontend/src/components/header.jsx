@@ -2,12 +2,12 @@ import {
   AppBar,
   Box,
   Toolbar,
-  Typography,
   Button,
   createTheme,
-  ThemeProvider,
+  ThemeProvider
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.png";
 import styling from "./header.module.css";
 const theme = createTheme({
   typography: {
@@ -15,7 +15,7 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#ffbd59", // orange
+      main: "#4bb966", // green
       contrastText: "#080357", // dark blue
     },
   },
@@ -29,10 +29,19 @@ const theme = createTheme({
           borderWidth: "2px",
           color: "#080357",
           "&:hover": {
-            borderColor: "#ffbd59", // hover color
+            borderColor: "#080357", // hover color
             backgroundColor: "#080357",
             color: "#ffffff",
           },
+        },
+      },
+    },
+
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          flexDirection: "row",
+          justifyContent: "space-between",
         },
       },
     },
@@ -43,13 +52,11 @@ const Header = ({ isLoggedIn, handleLogout }) => {
     return (
       <ThemeProvider theme={theme}>
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
+          <AppBar position="sticky">
+            <NavLink className={styling.link} to="/">
+              <img className={styling.logo} src={logo} />
+            </NavLink>
             <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={styling.link} to="/">
-                  Bright Budget
-                </NavLink>
-              </Typography>
               <Button onClick={handleLogout} variant="outlined">
                 Logout
               </Button>
@@ -62,13 +69,11 @@ const Header = ({ isLoggedIn, handleLogout }) => {
     return (
       <ThemeProvider theme={theme}>
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
+          <AppBar position="sticky">
+            <NavLink className={styling.link} to="/">
+              <img className={styling.logo} src={logo} />
+            </NavLink>
             <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <NavLink className={styling.link} to="/">
-                  Bright Budget
-                </NavLink>
-              </Typography>
               <Button style={{ margin: "5px" }} variant="outlined">
                 <NavLink to="/register" className={styling.link}>
                   Register
