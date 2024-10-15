@@ -1,0 +1,13 @@
+.link {
+  text-decoration: none;
+  color: #080357;
+}
+
+.link:hover {
+  color: white;
+}
+
+.logo {
+  width: 8em;
+  height: auto;
+}

@@ -1,0 +1,14 @@
+.linkText {
+  font-family: "Afacad Flux", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  font-size: 3em;
+  text-decoration: none;
+  color:#080357;
+}
+
+.linkText:hover {
+  color:#FFBD59;
+}
